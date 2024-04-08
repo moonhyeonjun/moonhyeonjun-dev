@@ -1,0 +1,25 @@
+---
+import BaseHeader from '~/components/base-header.astro';
+import BaseNav from '~/components/base-nav.astro';
+import { GiscusSection } from '~/components/giscus';
+import MainLayout from '~/layouts/main-layout.astro';
+import type { Language } from '~/libs/i18n';
+
+const lang: Language = 'en';
+
+const title = 'antv/x6 diagram';
+const description = 'A simple example of using antv/x6 to create a diagram.';
+---
+
+<MainLayout {lang} seo={{ title, description }}>
+  <BaseHeader {title} {description} noI18n>
+    <BaseNav class="mt-1.5" lang="en" />
+  </BaseHeader>
+  <div class="h-96 w-full max-w-content">
+    <iframe
+      src="https://craft-n8cr.vercel.app/craft/antv-x6-diagram"
+      style="width:100%; height: 100%;"
+      title="antv-x6-diagram"></iframe>
+  </div>
+  <GiscusSection className="mx-auto mt-20" {lang} client:idle />
+</MainLayout>
