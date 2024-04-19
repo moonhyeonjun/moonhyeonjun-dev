@@ -17,7 +17,7 @@ export const ui = {
     'nav.note.desc': 'A space for recording useful knowledge',
     'nav.craft': 'Craft',
     'nav.craft.desc': 'A space for creating something interesting',
-    'index.name': 'Oscar Moon',
+    'index.name': 'Hayden Moon',
     'index.desc':
       `<p>Passionate about interacting <b>smoothly</b> with users and <b>simplifying</b> complex things into simple and convenient forms.</p>` +
       `<p>Enjoy exploring and reflecting, and aim to record discoveries along the way.</p>`,
