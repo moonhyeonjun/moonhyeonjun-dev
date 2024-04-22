@@ -14,11 +14,6 @@ import remarkGfm from 'remark-gfm';
 /** @type {import('astro/config').defineConfig} */
 export default defineConfig({
   site: 'https://moonhyeonjun.github.io',
-  vite: {
-    ssr: {
-      noExternal: ['@antv/x6'],
-    },
-  },
   integrations: [
     tailwind({
       applyBaseStyles: false,
