@@ -19,6 +19,10 @@ export const isNote = (post: { slug: string }) => {
   return post.slug.includes('/note/');
 };
 
+export const isCraft = (post: { slug: string }) => {
+  return post.slug.includes('/craft/');
+};
+
 export const getPostType = (post: { slug: string }) => {
   if (isWriting(post)) return 'writing';
   if (isNote(post)) return 'note';
@@ -70,6 +74,7 @@ export type PostInfo = {
   description: string;
   /** /post/example */
   href: string;
+  coverImg?: string;
   date: Date;
   updatedDate?: Date;
   lang: Language;
@@ -77,7 +82,7 @@ export type PostInfo = {
 };
 
 export const getPostInfoList = async (
-  type: 'all' | 'writing' | 'note' = 'all',
+  type: 'all' | 'writing' | 'note' | 'craft' = 'all',
 ) => {
   const posts = await getPostCollection();
 
@@ -85,12 +90,14 @@ export const getPostInfoList = async (
     .filter((post) => {
       if (type === 'writing') return isWriting(post);
       if (type === 'note') return isNote(post);
+      if (type === 'craft') return isCraft(post);
       return true;
     })
     .map<PostInfo>((post) => ({
       title: post.data.title,
       description: post.data.description,
-      href: `/post/${resolveSlug(post.slug)}`,
+      href: post.data.url ? post.data.url : `/post/${resolveSlug(post.slug)}`,
+      coverImg: post.data.coverImg,
       date: post.data.date,
       updatedDate: post.data.updatedDate,
       lang: getLangFromSlug(post.slug),
