@@ -3,10 +3,13 @@ import BaseHeader from '~/components/base-header.astro';
 import BaseNav from '~/components/base-nav.astro';
 import MainLayout from '~/layouts/main-layout.astro';
 import { useI18n } from '~/libs/i18n';
+import { getPostInfoList } from '~/libs/mdx';
 
-const crafts = await Astro.glob('./craft/**/index.astro');
+const { lang, p, t } = useI18n(Astro.url);
 
-const { t } = useI18n(Astro.url);
+const allCrafts = await getPostInfoList('craft');
+
+const postFilteredByLang = allCrafts.filter((craft) => craft.lang === lang);
 
 const title = t('nav.craft');
 const description = t('nav.craft.desc');
@@ -16,17 +19,31 @@ const description = t('nav.craft.desc');
   <BaseHeader {title} {description}>
     <BaseNav class="mt-1.5" />
   </BaseHeader>
-  <section data-animate data-animate-speed="slow" class="my-14">
-    <div>
-      {
-        crafts.map((craft) => (
-          <div>
-            <a class="link" href={craft.url}>
-              {craft.url}
-            </a>
-          </div>
-        ))
-      }
-    </div>
-  </section>
+  <div
+    data-animate
+    data-animate-speed="slow"
+    class="group mt-14 space-y-7 pl-4"
+  >
+    {
+      postFilteredByLang.map((post) => (
+        <div>
+          <a class="group" href={p(post.href)} target={'_blank'}>
+            <div class="relative h-48 w-full bg-gray-200 group-hover:bg-gray-300 ">
+              <img
+                class="h-full w-full rounded-lg object-cover"
+                src={post.coverImg}
+                alt={post.title}
+              />
+            </div>
+            <div class="mt-2">
+              <h2 class="-mb-0.5 font-semibold leading-7 text-heading">
+                {post.title}
+              </h2>
+              <p class="text-sm text-second">{post.description}</p>
+            </div>
+          </a>
+        </div>
+      ))
+    }
+  </div>
 </MainLayout>
