@@ -5,7 +5,7 @@ import MainLayout from '~/layouts/main-layout.astro';
 import { useI18n } from '~/libs/i18n';
 import { getPostInfoList } from '~/libs/mdx';
 
-const { lang, p, t } = useI18n(Astro.url);
+const { lang, t } = useI18n(Astro.url);
 
 const allCrafts = await getPostInfoList('craft');
 
@@ -27,7 +27,7 @@ const description = t('nav.craft.desc');
     {
       postFilteredByLang.map((post) => (
         <div>
-          <a class="group" href={p(post.href)} target={'_blank'}>
+          <a class="group" href={post.href} target={'_blank'}>
             <div class="relative h-48 w-full bg-gray-200 group-hover:bg-gray-300 ">
               <img
                 class="h-full w-full rounded-lg object-cover"
