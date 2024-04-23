@@ -28,9 +28,9 @@ const description = t('nav.craft.desc');
       postFilteredByLang.map((post) => (
         <div>
           <a class="group" href={post.href} target={'_blank'}>
-            <div class="relative h-48 w-full bg-gray-200 group-hover:bg-gray-300 ">
+            <div class="relative h-48 w-full overflow-hidden bg-gray-200 transition-transform duration-300 group-hover:bg-gray-300">
               <img
-                class="h-full w-full rounded-lg object-cover"
+                class="w-full scale-100 transform object-cover transition-transform duration-300 hover:scale-105"
                 src={post.coverImg}
                 alt={post.title}
               />
